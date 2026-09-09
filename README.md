@@ -79,16 +79,20 @@ Packages are installed on demand via `pacman::p_load`.
 
 ## Running it
 
-Each script opens with a configuration block:
+Open the `toxic-effects.Rproj` file in RStudio. This sets the working
+directory to the repository root, which is what the scripts' relative paths
+assume.
+
+Each script also opens with its own configuration block:
 
 ```r
 data_dir <- "C:/path/to/your/data"
 out_dir  <- "C:/path/to/your/output"
 ```
 
-Set `data_dir` to the `data/` folder of this repository (`"data"` if you open the
-repository as an RStudio project), and `out_dir` to wherever figures and exported
-tables should go. Then run any script top to bottom.
+Set `data_dir` to the `data/` folder of this repository — simply `"data"` once
+the project is open — and `out_dir` to wherever figures and exported tables
+should go. Then run any script top to bottom.
 
 ```r
 source("RTgillW1_assays.R")
