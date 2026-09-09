@@ -1,8 +1,8 @@
 ##########################################
 ## Predator-prey interaction experiments of A. tonsa and A. pseudogonyaulax
 ## Here: Calculation and analysis of goniodomin cell content
-## Published in: 
-## All raw-data available on PANGAEA: 
+## Published in: Möller et al. (2024) Harmful Algae 138, 102705. https://doi.org/10.1016/j.hal.2024.102705
+## All raw-data available on PANGAEA: https://doi.org/10.1594/PANGAEA.967577
 ## Questions to: kristof-moeller@outlook.de
 ## Kristof Möller 05.22
 ## Alfred-Wegener-Institute Helgoland

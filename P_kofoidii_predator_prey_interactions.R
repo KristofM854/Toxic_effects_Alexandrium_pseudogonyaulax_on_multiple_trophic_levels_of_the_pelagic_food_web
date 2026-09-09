@@ -1,7 +1,7 @@
 ##########################################
 ## Analysis of predator-prey interaction experiments of P. kofoidii and various Alexandrium species (A. pseudogonyaulax, A. catenella, A. limii)
-## Published in: 
-## All raw-data available on PANGAEA: 
+## Published in: Möller et al. (2024) Harmful Algae 138, 102705. https://doi.org/10.1016/j.hal.2024.102705
+## All raw-data available on PANGAEA: https://doi.org/10.1594/PANGAEA.967725
 ## Questions to: kristof-moeller@outlook.de
 ## Kristof Möller 11.22-03.23
 ## Alfred-Wegener-Institute Bremerhaven

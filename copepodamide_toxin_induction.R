@@ -1,8 +1,8 @@
 ##########################################
 ## Predator-prey interaction experiments of copepods and A. pseudogonyaulax
 ## Here: Analysis of copepodamide toxin induction experiment
-## Published in: 
-## All raw-data available on PANGAEA: 
+## Published in: Möller et al. (2024) Harmful Algae 138, 102705. https://doi.org/10.1016/j.hal.2024.102705
+## All raw-data available on PANGAEA: (dataset DOI to be confirmed)
 ## Questions to: kristof-moeller@outlook.de
 ## Kristof Möller 03.24
 ## Alfred-Wegener-Institute Helgoland

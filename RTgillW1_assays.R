@@ -1,8 +1,8 @@
 ##########################################
 ## Gill cell line assays with cell-free supernatans of A. pseudogonyaulax and purified goniodomins
 ## Here: filtering of data, Dose-response-curves and plotting of data, EC50 calculation
-## Published in: 
-## All raw-data available on PANGAEA: 
+## Published in: Möller et al. (2024) Harmful Algae 138, 102705. https://doi.org/10.1016/j.hal.2024.102705
+## All raw-data available on PANGAEA: https://doi.org/10.1594/PANGAEA.968675 (gill cells), https://doi.org/10.1594/PANGAEA.968485 and https://doi.org/10.1594/PANGAEA.968492 (R. salina)
 ## Questions to: kristof-moeller@outlook.de
 ## Kristof Möller 05-06.23
 ## University of Vienna 
