@@ -1,12 +1,20 @@
 ##########################################
 ## Gill cell line assays with cell-free supernatans of A. pseudogonyaulax and purified goniodomins
 ## Here: filtering of data, Dose-response-curves and plotting of data, EC50 calculation
-## Published in: 
-## All raw-data available on PANGAEA: 
+## Published in: Möller et al. (2024) Harmful Algae 138, 102705. https://doi.org/10.1016/j.hal.2024.102705
+## All raw-data available on PANGAEA: https://doi.org/10.1594/PANGAEA.968675 (gill cells), https://doi.org/10.1594/PANGAEA.968485 and https://doi.org/10.1594/PANGAEA.968492 (R. salina)
 ## Questions to: kristof-moeller@outlook.de
 ## Kristof Möller 05-06.23
 ## University of Vienna 
 ##########################################
+
+##########################################
+## !!! SET THESE TWO PATHS BEFORE RUNNING !!!
+## data_dir: folder with the raw data downloaded from PANGAEA (see header).
+## out_dir : folder where figures and exported tables are written.
+##########################################
+data_dir <- "C:/path/to/your/data"
+out_dir  <- "C:/path/to/your/output"
 
 # Installs pacman ("package manager") if needed
 if (!require("pacman"))
@@ -27,7 +35,7 @@ if (!require("pacman"))
 pacman::p_load(NCmisc)
 
 # packages <-
-#   list.functions.in.file("C:\\Users\\krist\\OneDrive\\Dokumente\\AWI\\Promotion\\AP3\\Ap_all_new.R",
+#   list.functions.in.file("<set-your-path>/AP3\\Ap_all_new.R",
 #                          alphabetic = TRUE) # set to your filepath
 # summary(packages)
 
@@ -39,7 +47,7 @@ windowsFonts(Times = windowsFont("Times"))
 
 # Load Goniodomins CTB data (metabolic activity) ####
 GD_CTB = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/raw/GDs_CTB.txt",
+  file.path(data_dir, "GDs_CTB.txt"),
   header = TRUE,
   sep = ""
 )
@@ -142,7 +150,7 @@ EC50_GDA_GDA_sa <-
 # Goniodomins LDH (lytic activity - lactate dehydrogenase assay)
 # Load LDH data ####
 GD_LDH = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/raw/GDs_LDH.txt",
+  file.path(data_dir, "GDs_LDH.txt"),
   header = TRUE,
   sep = ""
 )
@@ -346,7 +354,7 @@ EC50_GDA_GDA_sa <-
 
 # CTB L2D2
 L2D2_CTB = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/raw/L2_D2_raw_CTB.txt",
+  file.path(data_dir, "L2_D2_raw_CTB.txt"),
   header = TRUE,
   sep = ""
 )
@@ -421,7 +429,7 @@ model.fits_CTB_2D2$pmax <- pm[, 3]
 
 # CTB L4-B1
 L4B1_CTB = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/raw/L4_B1_raw_CTB.txt",
+  file.path(data_dir, "L4_B1_raw_CTB.txt"),
   header = T,
   sep = ""
 )
@@ -515,7 +523,7 @@ model.fits_CTB_4B1$pmax <- pm[, 3]
 
 # CTB L4-B9
 L4B9_CTB = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/raw/L4_B9_raw_CTB.txt",
+  file.path(data_dir, "L4_B9_raw_CTB.txt"),
   header = T,
   sep = ""
 )
@@ -620,7 +628,7 @@ EC50_L4B9 <-
 ## LDH all strains
 # LDH L2D2
 L2D2_LDH = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/raw/L2_D2_raw_LDH.txt",
+  file.path(data_dir, "L2_D2_raw_LDH.txt"),
   header = TRUE,
   sep = ""
 )
@@ -693,7 +701,7 @@ model.fits_LDH_2D2$pmax <- pm[, 3]
 
 # LDH L4-B1
 L4B1_LDH = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/raw/L4_B1_raw_LDH.txt",
+  file.path(data_dir, "L4_B1_raw_LDH.txt"),
   header = T,
   sep = ""
 )
@@ -793,7 +801,7 @@ model.fits_LDH_4B1$pmax <- pm[, 3]
 
 # LDH L4-B9
 L4B9_LDH = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/raw/L4_B9_raw_LDH.txt",
+  file.path(data_dir, "L4_B9_raw_LDH.txt"),
   header = T,
   sep = ""
 )
@@ -1012,7 +1020,7 @@ P3a_ga <-
 # ggsave(
 #   "DRC_LDH_CTB.png",
 #   P3a,
-#   path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/figures",
+#   path = "<set-your-path>/AP3/figures",
 #   dpi = 300,
 #   width = 20,
 #   height = 15,
@@ -1031,13 +1039,13 @@ CTB_all_raw <- CTB_all_raw %>%
 # # Data export for pangaea (CTB)
 write.table(
   CTB_all_raw,
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/PANGAEA/CTB_all_raw.txt",
+  file.path(out_dir, "CTB_all_raw.txt"),
   sep = "\t",
   row.names = FALSE
 )
 write.table(
   GD_CTB,
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/PANGAEA/CTB_all_raw_GD.txt",
+  file.path(out_dir, "CTB_all_raw_GD.txt"),
   sep = "\t",
   row.names = FALSE
 )
@@ -1052,13 +1060,13 @@ LDH_all_raw <- LDH_all_raw %>%
 # # Data export for pangaea (LDH)
 write.table(
   LDH_all_raw ,
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/PANGAEA/LDH_all_raw.txt",
+  file.path(out_dir, "LDH_all_raw.txt"),
   sep = "\t",
   row.names = FALSE
 )
 write.table(
   GD_LDH ,
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/PANGAEA/LDH_all_raw_GD.txt",
+  file.path(out_dir, "LDH_all_raw_GD.txt"),
   sep = "\t",
   row.names = FALSE
 )
@@ -1077,7 +1085,7 @@ P_combined <- P3a + P_GD_all + plot_layout(ncol = 1) &
 ggsave(
   "DRC_all.png",
   P_combined,
-  path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/figures",
+  path = out_dir,
   dpi = 300,
   width = 3.5,
   height = 5,
@@ -1086,7 +1094,7 @@ ggsave(
 
 # # Rhodomonas assay A. monilatum and GDs
 # Rho_assay = read.csv(
-#   "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/raw/Rho_assay.txt",
+#   "<set-your-path>/AP3/raw/Rho_assay.txt",
 #   header = T,
 #   sep = ""
 # )
@@ -1199,7 +1207,7 @@ ggsave(
 # # ggsave(
 # #   "Rho_all.png",
 # #   Rho_all,
-# #   path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/figures",
+# #   path = "<set-your-path>/AP3/figures",
 # #   dpi = 300,
 # #   width = 16,
 # #   height = 10,
@@ -1268,7 +1276,7 @@ ggsave(
 # # ggsave(
 # #   "Rho_all2.png",
 # #   Rho_all2,
-# #   path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/figures",
+# #   path = "<set-your-path>/AP3/figures",
 # #   dpi = 300,
 # #   width = 22.5,
 # #   height = 15,
@@ -1278,11 +1286,11 @@ ggsave(
 # Rho_assay <- Rho_assay %>% group_by(treat, time, conc_pg_ul) %>% mutate(replicate = rep(1:length(data)))
 # 
 # # # Data export for pangaea (Rho assays)
-# # write.table(Rho_assay %>% drop_na(data), "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/PANGAEA/Rho_assay.txt", sep = "\t", row.names = FALSE)
+# # write.table(Rho_assay %>% drop_na(data), "<set-your-path>/AP3/PANGAEA/Rho_assay.txt", sep = "\t", row.names = FALSE)
 # 
 # # Rhodomonas assay Alexandrium pseudogonyaulax - done by Francesco (Master student)
 # Rho_assay2 = read.csv(
-#   "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/raw/Rho_assay_Ap.txt",
+#   "<set-your-path>/AP3/raw/Rho_assay_Ap.txt",
 #   header = T,
 #   sep = ""
 # )
@@ -1310,7 +1318,7 @@ ggsave(
 # Rho_assay2 <- Rho_assay2 %>% mutate(data = counts/Rho_control*100)
 # 
 # # # Data export for pangaea (Rho assays)
-# # write.table(Rho_assay2, "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/PANGAEA/Rho_assay_Ap.txt", sep = "\t", row.names = FALSE)
+# # write.table(Rho_assay2, "<set-your-path>/AP3/PANGAEA/Rho_assay_Ap.txt", sep = "\t", row.names = FALSE)
 # 
 # Rho_assay2_agg <-
 #   aggregate(data = Rho_assay2, data ~ conc_pg_ul + treat + strain, FUN = "mean")
@@ -1406,7 +1414,7 @@ ggsave(
 # # ggsave(
 # #   "Rho_all_Ap.png",
 # #   Rho_all_Ap,
-# #   path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/figures",
+# #   path = "<set-your-path>/AP3/figures",
 # #   dpi = 300,
 # #   width = 16,
 # #   height = 10,
@@ -1417,7 +1425,7 @@ ggsave(
 # Rho_assay2 <- Rho_assay2 %>% group_by(treat, conc_pg_ul) %>% mutate(replicate = rep(1:length(data)))
 # 
 # # # Data export for pangaea (Rho assays)
-# # write.table(Rho_assay2, "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/PANGAEA/Rho_assay_Ap.txt", sep = "\t", row.names = FALSE)
+# # write.table(Rho_assay2, "<set-your-path>/AP3/PANGAEA/Rho_assay_Ap.txt", sep = "\t", row.names = FALSE)
 # 
 # # Combine all R. salina bioassays in one figure 
 # 
@@ -1482,7 +1490,7 @@ ggsave(
 # ggsave(
 #   "Rho_all_new.png",
 #   Rho_all,
-#   path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/figures",
+#   path = "<set-your-path>/AP3/figures",
 #   dpi = 300,
 #   width = 16,
 #   height = 10,
@@ -1492,7 +1500,7 @@ ggsave(
 # Rhodomonas salina bioassays of Alexandrium monilatum, Alexandrium pseudogonyaulax and purified goniodomins (GDA, GDA-sa, GDB, GDA+GDA-sa) combined
 # Rhodomonas assay Alexandrium pseudogonyaulax - done by Francesco (Master student)
 Rho_assay_all = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/raw/Rho_assay_all.txt",
+  file.path(data_dir, "Rho_assay_all.txt"),
   header = T,
   sep = ""
 )
@@ -1752,7 +1760,7 @@ pacman::p_load(cowplot)
 ggsave(
   "Rho_all_test.png",
   Rho_all2,
-  path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/figures",
+  path = out_dir,
   dpi = 300,
   width = 3.5,
   height = 5,
@@ -1770,7 +1778,7 @@ graph_abstract
 ggsave(
   "graph_abstract.png",
   graph_abstract,
-  path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/figures",
+  path = out_dir,
   dpi = 300,
   width = 8,
   height = 5,
@@ -1780,7 +1788,7 @@ ggsave(
 # export word document with all packages used 
 
 # install_github("Pakillo/grateful")
-# cite_packages(out.format = "docx", out.dir = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP3/", out.file = "DRC_packages", pkgs = "Session")
+# cite_packages(out.format = "docx", out.dir = "<set-your-path>/AP3/", out.file = "DRC_packages", pkgs = "Session")
 
 # Garbage collection: call after large objects have been removed 
 gc()

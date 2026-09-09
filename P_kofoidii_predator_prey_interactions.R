@@ -1,11 +1,19 @@
 ##########################################
 ## Analysis of predator-prey interaction experiments of P. kofoidii and various Alexandrium species (A. pseudogonyaulax, A. catenella, A. limii)
-## Published in: 
-## All raw-data available on PANGAEA: 
+## Published in: Möller et al. (2024) Harmful Algae 138, 102705. https://doi.org/10.1016/j.hal.2024.102705
+## All raw-data available on PANGAEA: https://doi.org/10.1594/PANGAEA.967725
 ## Questions to: kristof-moeller@outlook.de
 ## Kristof Möller 11.22-03.23
 ## Alfred-Wegener-Institute Bremerhaven
 ##########################################
+
+##########################################
+## !!! SET THESE TWO PATHS BEFORE RUNNING !!!
+## data_dir: folder with the raw data downloaded from PANGAEA (see header).
+## out_dir : folder where figures and exported tables are written.
+##########################################
+data_dir <- "C:/path/to/your/data"
+out_dir  <- "C:/path/to/your/output"
 
 # INSTALL AND LOAD PACKAGES ################################
 # Installs pacman ("package manager") if needed
@@ -31,7 +39,7 @@ windowsFonts(Times = windowsFont("Times"))
 pacman::p_load(readr)
 
 data = read_delim(
-  "C:\\Users\\krist\\OneDrive\\Dokumente\\AWI\\Promotion\\AP2-Helgoland\\R-studio\\PK_mix.txt",
+  file.path(data_dir, "PK_mix.txt"),
   delim = "\t",
   col_names = F
 )
@@ -102,7 +110,7 @@ stat2 %>% group_by(time) %>% kruskal_test(data ~ treat)
 # # Data export for pangaea
 write.table(
   ingestion_rates,
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/PANGAEA/PK_bialgal.txt",
+  file.path(out_dir, "PK_bialgal.txt"),
   sep = "\t",
   row.names = FALSE
 )
@@ -177,7 +185,7 @@ ratios_results <- ratios %>%
 # Cell densities and ingestion rates of P. kofoidii feeding on monoalgal cultures of Alex5 or A. pseudogonyaulax #####
 # Load data
 data = read_delim(
-  "C:\\Users\\krist\\OneDrive\\Dokumente\\AWI\\Promotion\\AP2-Helgoland\\R-studio\\PK_sum.txt",
+  file.path(data_dir, "PK_sum.txt"),
   delim = "\t",
   col_names = T
 )
@@ -278,7 +286,7 @@ pwc
 # # Data export for pangaea
 # write.table(
 #   data_aov,
-#   "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/PANGAEA/PK_monoalgal.txt",
+#   "<set-your-path>/AP2-Helgoland/PANGAEA/PK_monoalgal.txt",
 #   sep = "\t",
 #   row.names = FALSE
 # )
@@ -367,7 +375,7 @@ P1 <- ggplot(confidence_intervals_all, aes(x = time, y = estimate, col = treat))
 # ggsave(
 #   "Mean_sum_PK.png",
 #   P1,
-#   path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/AP2",
+#   path = "<set-your-path>/AP2-Helgoland/AP2",
 #   dpi = 300,
 #   width = 18,
 #   height = 10,
@@ -415,7 +423,7 @@ data_aov2 <-
 #          ifelse(data5$treat2 == "Ap", "A. pseudogonyaulax", NA))
 # 
 # tab <-
-#   data5 %>% arrange(time) %>% flextable() %>% autofit() %>% save_as_docx(path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/Ingestion_rate_PK_A5_AP.docx")
+#   data5 %>% arrange(time) %>% flextable() %>% autofit() %>% save_as_docx(path = "<set-your-path>/AP2-Helgoland/Ingestion_rate_PK_A5_AP.docx")
 
 # add small constant to all ingestion rates to treat zeros for log-transformation
 data_aov2$ingestion_rate <- data_aov2$ingestion_rate + 0.0001
@@ -460,7 +468,7 @@ pwc2
 # # Data export for pangaea
 # write.table(
 #   data_aov2,
-#   "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/PANGAEA/PK_monoalgal_ingestion.txt",
+#   "<set-your-path>/AP2-Helgoland/PANGAEA/PK_monoalgal_ingestion.txt",
 #   sep = "\t",
 #   row.names = FALSE
 # )
@@ -509,7 +517,7 @@ g <- P1 + P2 + plot_layout(ncol = 1, axis_titles = "collect_x")
 ggsave(
   "PK_1.png",
   g,
-  path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/AP2",
+  path = out_dir,
   dpi = 300,
   width = 3.5,
   height = 4.5,
@@ -520,7 +528,7 @@ ggsave(
 # pacman::p_load(grateful)
 # cite_packages(
 #   out.format = "docx",
-#   out.dir = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/",
+#   out.dir = "<set-your-path>/AP2-Helgoland/",
 #   pkgs = "Session",
 #   out.file = "PK_packages"
 # )

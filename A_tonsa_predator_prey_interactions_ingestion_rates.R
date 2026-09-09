@@ -1,12 +1,20 @@
 ##########################################
 ## Predator-prey interaction experiments of A. tonsa and A. pseudogonyaulax
 ## Here: Calculation and analysis of ingestion rates
-## Published in: 
-## All raw-data available on PANGAEA: 
+## Published in: Möller et al. (2024) Harmful Algae 138, 102705. https://doi.org/10.1016/j.hal.2024.102705
+## All raw-data available on PANGAEA: https://doi.org/10.1594/PANGAEA.967577
 ## Questions to: kristof-moeller@outlook.de
 ## Kristof Möller 05.22
 ## Alfred-Wegener-Institute Helgoland
 ##########################################
+
+##########################################
+## !!! SET THESE TWO PATHS BEFORE RUNNING !!!
+## data_dir: folder with the raw data downloaded from PANGAEA (see header).
+## out_dir : folder where figures and exported tables are written.
+##########################################
+data_dir <- "C:/path/to/your/data"
+out_dir  <- "C:/path/to/your/output"
 
 # INSTALL AND LOAD PACKAGES ################################
 # Installs pacman ("package manager") if needed
@@ -30,7 +38,7 @@ invisible(lapply(
 ##############
 # Load data
 data = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/R-studio/Ingestion_rate.txt",
+  file.path(data_dir, "Ingestion_rate.txt"),
   header = TRUE,
   sep = ""
 )
@@ -106,7 +114,7 @@ data_all <- full_join(full_join(N4, C4), Cop)
 data_all <- data_all %>% group_by(strain, group) %>% mutate(replicate = rep(1:length(data))) %>% drop_na(data1)
 
 # # Data export for pangaea
-# write.table(data_all, "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/PANGAEA/Ingestion_rate.txt", sep = "\t", row.names = FALSE)
+# write.table(data_all, "<set-your-path>/AP2-Helgoland/PANGAEA/Ingestion_rate.txt", sep = "\t", row.names = FALSE)
 
 # Check for outliers and remove them #####
 # outliers_mad: Median absolute deviation --> Only accetable for n>5
@@ -326,7 +334,7 @@ saveRDS(P_all_manuscript_ingestion, "P_all_manuscript_ingestion.rds")
 
 # # export word document with package citations used in ingestion rate R-files
 # pacman::p_load(grateful)
-# cite_packages(out.format = "docx", out.dir = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/", pkgs = "Session", out.file = "ingestion_rate_packages")
+# cite_packages(out.format = "docx", out.dir = "<set-your-path>/AP2-Helgoland/", pkgs = "Session", out.file = "ingestion_rate_packages")
 
 # Garbage collection: call after large objects have been removed 
 gc()

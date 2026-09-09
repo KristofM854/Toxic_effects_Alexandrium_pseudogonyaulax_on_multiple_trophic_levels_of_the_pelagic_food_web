@@ -3,6 +3,14 @@
 # A. tonsa eggs were subjected to the supernatant of A. pseudogonyaulax cultures for 48h; egg hatching ratio was determined by counting hatched nauplii
 # AWI Helgoland
 
+##########################################
+## !!! SET THESE TWO PATHS BEFORE RUNNING !!!
+## data_dir: folder with the raw data downloaded from PANGAEA (see header).
+## out_dir : folder where figures and exported tables are written.
+##########################################
+data_dir <- "C:/path/to/your/data"
+out_dir  <- "C:/path/to/your/output"
+
 # Installs pacman ("package manager") if needed
 if (!require("pacman"))
   install.packages("pacman")
@@ -24,7 +32,7 @@ windowsFonts(Times = windowsFont("Times"))
 ## Load data, unlist dataframe, change , to . and introduce grouping factor
 
 data = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/R-studio/Hatching_rate.txt",
+  file.path(data_dir, "Hatching_rate.txt"),
   header = FALSE,
   sep = ""
 )
@@ -197,7 +205,7 @@ hatching_rate <- ggplot(confidence_intervals, aes(y = estimate, x = group)) +
 
 ggsave(
   "Hatching_rate_CI.png",
-  path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/AP2", 
+  path = out_dir, 
   hatching_rate, 
   width = 3.5, height = 4, units = "in", dpi = 300, scaling = 1.35
 )
@@ -205,7 +213,7 @@ ggsave(
 #
 # # export word document with package citations used in ingestion rate and GDA R-files
 # pacman::p_load(grateful)
-# cite_packages(out.format = "docx", out.dir = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/", pkgs = "Session", out.file = "hatching_rate_packages")
+# cite_packages(out.format = "docx", out.dir = "<set-your-path>/AP2-Helgoland/", pkgs = "Session", out.file = "hatching_rate_packages")
 
 # Garbage collection: call after large objects have been removed
 gc()

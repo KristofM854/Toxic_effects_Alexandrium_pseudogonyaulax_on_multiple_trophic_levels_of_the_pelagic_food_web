@@ -1,12 +1,20 @@
 ##########################################
 ## Predator-prey interaction experiments of A. tonsa and A. pseudogonyaulax
 ## Here: Calculation and analysis of goniodomin cell content
-## Published in: 
-## All raw-data available on PANGAEA: 
+## Published in: Möller et al. (2024) Harmful Algae 138, 102705. https://doi.org/10.1016/j.hal.2024.102705
+## All raw-data available on PANGAEA: https://doi.org/10.1594/PANGAEA.967577
 ## Questions to: kristof-moeller@outlook.de
 ## Kristof Möller 05.22
 ## Alfred-Wegener-Institute Helgoland
 ##########################################
+
+##########################################
+## !!! SET THESE TWO PATHS BEFORE RUNNING !!!
+## data_dir: folder with the raw data downloaded from PANGAEA (see header).
+## out_dir : folder where figures and exported tables are written.
+##########################################
+data_dir <- "C:/path/to/your/data"
+out_dir  <- "C:/path/to/your/output"
 
 # Installs pacman ("package manager") if needed
 if (!require("pacman")) install.packages("pacman")
@@ -23,7 +31,7 @@ invisible(lapply(
 pacman::p_load(extrafont, NCmisc)
 # 
 # packages <-
-#   list.functions.in.file("C:\\Users\\krist\\OneDrive\\Dokumente\\AWI\\Promotion\\AP2-Helgoland\\AP2\\R-files\\GDA.R",
+#   list.functions.in.file("<set-your-path>/AP2-Helgoland\\AP2\\R-files\\GDA.R",
 #                          alphabetic = TRUE) # set to your filepath
 # summary(packages)
 
@@ -31,11 +39,11 @@ loadfonts(device = "win")
 windowsFonts(Times = windowsFont("Times"))
 
 # Check for used packages in the file
-# list.functions.in.file("C:\\Users\\krist\\OneDrive\\Dokumente\\AWI\\Promotion\\AP2-Helgoland\\AP2\\GDA.R")
+# list.functions.in.file("<set-your-path>/AP2-Helgoland\\AP2\\GDA.R")
 
 # Load data; replace commas; change strain format
 data = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/R-studio/GDA.txt",
+  file.path(data_dir, "GDA.txt"),
   header = TRUE,
   sep = ""
 )
@@ -49,7 +57,7 @@ data$data_norm <-
   ((data$data * 10 ^ -12) / (768.941)) / ((data$C_pg.cell * 10 ^ -12) / (12.011))
 
 # counts <- data %>% group_by(Strain_date) %>% dplyr::summarise(counts = dplyr::n())
-# write.table(counts, "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/counts_GDA.txt", sep = "\t", row.names = FALSE)
+# write.table(counts, "<set-your-path>/AP2-Helgoland/counts_GDA.txt", sep = "\t", row.names = FALSE)
 
 ##subgrous of L2D2;L4B1;L4B9 and convert the idenfication key (Strain_date) to a factor
 pacman::p_load(tidyr, dplyr, rstatix)
@@ -87,7 +95,7 @@ data_all <- data_all %>% mutate(strain = stringr::str_sub(data_all$Strain_date, 
 data_all <- data_all %>% group_by(strain, life_stage) %>% mutate(replicate = rep(1:length(data)), poc = C_pg.cell / 1000) 
 
 ## Data export to pangaea
-# write.table(data_all, "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/PANGAEA/GDA.txt", sep = "\t", row.names = FALSE)
+# write.table(data_all, "<set-your-path>/AP2-Helgoland/PANGAEA/GDA.txt", sep = "\t", row.names = FALSE)
 
 ## Check for potential outliers and remove them #####
 pacman::p_load(Routliers, outliers, readr)
@@ -469,7 +477,7 @@ P_all_manuscript <-
   ) +
   labs(subtitle = anova_subtitle)
 
-# ggsave("GDA_manuscript.png", P_all_manuscript, path="C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/AP2",dpi=300, width=20, height=15, units="cm")
+# ggsave("GDA_manuscript.png", P_all_manuscript, path="<set-your-path>/AP2-Helgoland/AP2",dpi=300, width=20, height=15, units="cm")
 
 # combine ingestion rates and GDA figure in one for manuscript
 pacman::p_load(ggpubr, patchwork)
@@ -482,7 +490,7 @@ P_combined <- ingestion_rate + P_all_manuscript + plot_layout(ncol = 2, guides =
 ggsave(
   "P_combined2.png",
   P_combined,
-  path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/AP2",
+  path = out_dir,
   dpi = 300,
   width = 7,
   height = 4,
@@ -493,7 +501,7 @@ ggsave(
 # pacman::p_load(grateful)
 # cite_packages(
 #   out.format = "docx",
-#   out.dir = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/",
+#   out.dir = "<set-your-path>/AP2-Helgoland/",
 #   pkgs = "Session",
 #   out.file = "GDA_packages"
 # )

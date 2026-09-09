@@ -1,12 +1,20 @@
 ##########################################
 ## Predator-prey interaction experiments of A. tonsa and A. pseudogonyaulax
 ## Here:  GDA Excretion/metabolization rate of A. tonsa after feeding on A. pseudogonyaulax
-## Published in: 
-## All raw-data available on PANGAEA: 
+## Published in: Möller et al. (2024) Harmful Algae 138, 102705. https://doi.org/10.1016/j.hal.2024.102705
+## All raw-data available on PANGAEA: https://doi.org/10.1594/PANGAEA.967425
 ## Questions to: kristof-moeller@outlook.de
 ## Kristof Möller 05.22
 ## Alfred-Wegener-Institute Helgoland
 ##########################################
+
+##########################################
+## !!! SET THESE TWO PATHS BEFORE RUNNING !!!
+## data_dir: folder with the raw data downloaded from PANGAEA (see header).
+## out_dir : folder where figures and exported tables are written.
+##########################################
+data_dir <- "C:/path/to/your/data"
+out_dir  <- "C:/path/to/your/output"
 
 # Installs pacman ("package manager") if needed
 if (!require("pacman"))
@@ -38,7 +46,7 @@ pacman::p_load(
 
 # Load data
 data = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/R-studio/Extra.txt",
+  file.path(data_dir, "Extra.txt"),
   header = TRUE,
   sep = ""
 )
@@ -99,7 +107,7 @@ A <- ggplot(data1, aes(x = time, y = data)) +
 # ggsave(
 #   "Qual_Meta_2.png",
 #   plot = Final,
-#   path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/AP2",
+#   path = "<set-your-path>/AP2-Helgoland/AP2",
 #   dpi = 300,
 #   width = 18,
 #   height = 10,

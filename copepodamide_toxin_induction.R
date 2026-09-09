@@ -1,12 +1,20 @@
 ##########################################
 ## Predator-prey interaction experiments of copepods and A. pseudogonyaulax
 ## Here: Analysis of copepodamide toxin induction experiment
-## Published in: 
-## All raw-data available on PANGAEA: 
+## Published in: Möller et al. (2024) Harmful Algae 138, 102705. https://doi.org/10.1016/j.hal.2024.102705
+## All raw-data available on PANGAEA: (dataset DOI to be confirmed)
 ## Questions to: kristof-moeller@outlook.de
 ## Kristof Möller 03.24
 ## Alfred-Wegener-Institute Helgoland
 ##########################################
+
+##########################################
+## !!! SET THESE TWO PATHS BEFORE RUNNING !!!
+## data_dir: folder with the raw data downloaded from PANGAEA (see header).
+## out_dir : folder where figures and exported tables are written.
+##########################################
+data_dir <- "C:/path/to/your/data"
+out_dir  <- "C:/path/to/your/output"
 
 # Installs pacman ("package manager") if needed
 if (!require("pacman")) install.packages("pacman")
@@ -23,18 +31,18 @@ invisible(lapply(
 pacman::p_load(extrafont, NCmisc)
 # 
 # packages <-
-#   list.functions.in.file("C:\\Users\\krist\\OneDrive\\Dokumente\\AWI\\Promotion\\AP2-Helgoland\\AP2\\R-files\\GDA.R",
+#   list.functions.in.file("<set-your-path>/AP2-Helgoland\\AP2\\R-files\\GDA.R",
 #                          alphabetic = TRUE) # set to your filepath
 # summary(packages)
 loadfonts(device = "win")
 windowsFonts(Times = windowsFont("Times"))
 
 # Check for used packages in the file
-# list.functions.in.file("C:\\Users\\krist\\OneDrive\\Dokumente\\AWI\\Promotion\\AP2-Helgoland\\AP2\\GDA.R")
+# list.functions.in.file("<set-your-path>/AP2-Helgoland\\AP2\\GDA.R")
 
 # Load data; replace commas; change strain format
 data = read.csv(
-  "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/R-studio/copepodamide_toxin_induction.txt",
+  file.path(data_dir, "copepodamide_toxin_induction.txt"),
   header = TRUE,
   sep = ""
 )
@@ -175,7 +183,7 @@ P_combined <- ggplot(filtered_data, aes(x = group, y = estimate)) +
 # ggsave(
 #   "GDA_induction_copepodamides.png",
 #   P_combined,
-#   path = "C:/Users/krist/OneDrive/Dokumente/AWI/Promotion/AP2-Helgoland/AP2",
+#   path = "<set-your-path>/AP2-Helgoland/AP2",
 #   dpi = 300,
 #   width = 2.5,
 #   height = 3,
